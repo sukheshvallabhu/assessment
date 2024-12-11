@@ -1,1 +1,36 @@
+version: '3'
+services:
+  wazuh-manager:
+    image: wazuh/wazuh:latest
+    container_name: wazuh-manager
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    volumes:
+      - wazuh-data:/var/ossec/data
+    networks:
+      - wazuh-network
+    ports:
+      - "1514:1514"
+      - "55000:55000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:55000"]
+      interval: 30s
+      retries: 3
 
+  wazuh-api:
+    image: wazuh/wazuh-api:latest
+    container_name: wazuh-api
+    environment:
+      - MANAGER_HOST=wazuh-manager
+    networks:
+      - wazuh-network
+    ports:
+      - "55000:55000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:55000"]
+      interval: 30s
+      retries: 3
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
+    container_name: elasticsearch
