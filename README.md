@@ -1,4 +1,9 @@
 ## Setup Instructions
+# Clone the Repository
+First, clone the repository to your local machine:
+git clone https://github.com/sukheshvallabhu/assessment.git
+cd assessment
+
 1. Ensure you have Terraform installed.
 2. Initialize Terraform:
       terraform init
