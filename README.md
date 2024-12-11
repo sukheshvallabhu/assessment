@@ -24,12 +24,3 @@ cd assessment
    docker logs wazuh-manager
 3. Access the Wazuh Web UI and verify the status of the system.
 
- 
-## Clean-Up Resources
-
-After testing, be sure to clean up the resources to avoid ongoing costs:
-
-**Destroy the Terraform infrastructure**
-terraform destroy
-
-
